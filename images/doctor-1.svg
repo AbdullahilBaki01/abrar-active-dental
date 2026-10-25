@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="doc1_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdfa"/>
+      <stop offset="100%" stop-color="#ccfbf1"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="480" rx="20" fill="url(#doc1_bg)"/>
+  <!-- Head & Hair -->
+  <circle cx="200" cy="160" r="65" fill="#fbd38d"/>
+  <path d="M140 145 C140 95, 260 95, 260 145 C250 110, 150 110, 140 145 Z" fill="#1e293b"/>
+  <!-- Neck -->
+  <rect x="185" y="215" width="30" height="35" fill="#f6ad55"/>
+  <!-- Lab Coat / Scrubs -->
+  <path d="M110 320 L135 240 L185 245 L200 275 L215 245 L265 240 L290 320 L300 480 L100 480 Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M185 245 L200 275 L215 245 L200 310 Z" fill="#0d9488"/>
+  <!-- Stethoscope -->
+  <path d="M160 250 C160 330, 240 330, 240 250" fill="none" stroke="#0f766e" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="200" cy="340" r="12" fill="#0f766e"/>
+  <circle cx="200" cy="340" r="6" fill="#ccfbf1"/>
+  <!-- Dental Badge -->
+  <rect x="135" y="310" width="35" height="18" rx="4" fill="#0d9488"/>
+  <text x="141" y="323" font-family="sans-serif" font-size="8" fill="#ffffff" font-weight="bold">BDS</text>
+  <!-- Gentle smile & glasses -->
+  <circle cx="180" cy="155" r="14" fill="none" stroke="#334155" stroke-width="2.5"/>
+  <circle cx="220" cy="155" r="14" fill="none" stroke="#334155" stroke-width="2.5"/>
+  <line x1="194" y1="155" x2="206" y2="155" stroke="#334155" stroke-width="2.5"/>
+  <path d="M188 185 Q200 195 212 185" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

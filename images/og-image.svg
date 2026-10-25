@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="ogbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#134e4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#ogbg)"/>
+  
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="#ffffff" fill-opacity="0.04" stroke="#2dd4bf" stroke-opacity="0.3" stroke-width="2"/>
+  
+  <circle cx="200" cy="220" r="60" fill="#0d9488"/>
+  <path d="M185 190C185 178 197 175 200 180C203 175 215 178 215 190C215 208 217 220 210 240C206 250 199 249 195 235C193 230 191 230 190 235C186 249 179 250 175 240C168 220 185 208 185 190Z" fill="white"/>
+  
+  <text x="290" y="210" font-family="Poppins, sans-serif" font-size="44" font-weight="800" fill="#ffffff">Abrar Active Dental</text>
+  <text x="290" y="255" font-family="Hind Siliguri, sans-serif" font-size="28" font-weight="600" fill="#2dd4bf">আবরার একটিভ ডেন্টাল</text>
+  
+  <text x="120" y="340" font-family="Poppins, sans-serif" font-size="28" font-weight="500" fill="#e2e8f0">Modern, Hygienic &amp; Caring Dental Clinic in Bangladesh</text>
+  <text x="120" y="380" font-family="Poppins, sans-serif" font-size="20" fill="#94a3b8">Dental Scaling • Root Canal • Braces • Teeth Whitening • Pediatric Dentistry</text>
+  
+  <rect x="120" y="420" width="220" height="50" rx="12" fill="#0d9488"/>
+  <text x="230" y="452" font-family="Poppins, sans-serif" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">Book Appointment</text>
+  
+  <rect x="360" y="420" width="180" height="50" rx="12" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+  <text x="450" y="452" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#2dd4bf" text-anchor="middle">Call / WhatsApp</text>
+</svg>
