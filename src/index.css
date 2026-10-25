@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #0284c7;
+  --brand-primary-dark: #0369a1;
+  --brand-accent: #0ea5e9;
+  --color-ink: #0f172a;
+  --color-surface: #ffffff;
+}
+
+/* Smooth Scrolling & Vertical Snap Sections */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  -webkit-tap-highlight-color: transparent;
+}
+
+section[id] {
+  scroll-snap-align: start;
+  scroll-margin-top: 4.25rem;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Switch font stack seamlessly when Bengali language is active */
+html[lang="bn"],
+html[lang="bn"] body {
+  font-family: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
+}
+
+/* iOS Safe Area bottom spacing for bottom sticky nav */
+.pb-safe {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Custom focus ring styling for WCAG AA compliance */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
