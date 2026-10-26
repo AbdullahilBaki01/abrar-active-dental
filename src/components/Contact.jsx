@@ -14,15 +14,15 @@ export default function Contact() {
   const landmarksText = isBn ? clinicData.address.landmarksBn : clinicData.address.landmarks;
 
   return (
-    <section id="contact" className="py-14 sm:py-20 bg-slate-50/70 border-t border-slate-100">
+    <section id="contact" className="py-14 sm:py-20 bg-gradient-to-b from-white via-[#8DD0F5]/15 to-[#8DD0F5]/25 border-t border-[#8DD0F5]/35">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-100 inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#072444] bg-[#8DD0F5]/30 px-3.5 py-1 rounded-full border border-[#78C4EF]/60 shadow-sm inline-block mb-3">
             {t('contact.subtitle')}
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy-900 tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#072444] tracking-tight mb-4">
             {t('contact.title')}
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
@@ -45,7 +45,7 @@ export default function Contact() {
               <div className="flex items-center gap-3">
                 <span className={`w-3 h-3 rounded-full ${openStatus.isOpen ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
                 <div>
-                  <h4 className="text-sm font-bold text-navy-900">
+                  <h4 className="text-sm font-bold text-[#072444]">
                     {isBn ? openStatus.labelBn : openStatus.labelEn}
                   </h4>
                   <p className="text-xs text-slate-600">
@@ -56,20 +56,20 @@ export default function Contact() {
 
               <a
                 href="#appointment"
-                className="px-3 py-1.5 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-sm"
+                className="px-3.5 py-1.5 text-xs font-bold text-white bg-[#072444] hover:bg-[#0c3966] rounded-full shadow-sm transition-all"
               >
                 {t('hero.ctaBook')}
               </a>
             </div>
 
             {/* Address Card */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-soft">
+            <div className="bg-white/95 p-6 rounded-2xl border border-[#8DD0F5]/45 shadow-[0_4px_20px_rgba(74,155,218,0.06)] hover:border-[#4A9BDA] transition-all">
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0 border border-brand-100">
-                  <MapPin className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#8DD0F5]/30 to-[#78C4EF]/15 text-[#072444] flex items-center justify-center shrink-0 border border-[#8DD0F5]/60 shadow-sm">
+                  <MapPin className="w-5 h-5 text-[#072444]" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-navy-900 mb-1">
+                  <h4 className="text-sm font-bold text-[#072444] mb-1">
                     {t('contact.addressTitle')}
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -83,7 +83,7 @@ export default function Contact() {
                     href={clinicData.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-3 text-xs font-bold text-brand-700 hover:text-brand-800"
+                    className="inline-flex items-center gap-1.5 mt-3 text-xs font-bold text-[#4A9BDA] hover:text-[#072444] transition-colors"
                   >
                     <span>{t('contact.getDirections')}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -93,17 +93,17 @@ export default function Contact() {
             </div>
 
             {/* Phone & WhatsApp Card */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-soft">
+            <div className="bg-white/95 p-6 rounded-2xl border border-[#8DD0F5]/45 shadow-[0_4px_20px_rgba(74,155,218,0.06)] hover:border-[#4A9BDA] transition-all">
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 border border-emerald-100">
+                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-sm font-bold text-navy-900 mb-1">
+                  <h4 className="text-sm font-bold text-[#072444] mb-1">
                     {t('contact.phoneTitle')}
                   </h4>
                   <p className="text-sm font-semibold text-slate-800 mb-3">
-                    <a href={`tel:${clinicData.phoneRaw}`} className="hover:text-brand-600">
+                    <a href={`tel:${clinicData.phoneRaw}`} className="hover:text-[#4A9BDA] transition-colors">
                       {clinicData.phone}
                     </a>
                   </p>
@@ -111,9 +111,9 @@ export default function Contact() {
                   <div className="flex flex-wrap gap-2">
                     <a
                       href={`tel:${clinicData.phoneRaw}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-[#8DD0F5]/20 hover:bg-[#8DD0F5]/35 text-[#072444] border border-[#78C4EF]/40 transition-colors"
                     >
-                      <Phone className="w-3.5 h-3.5 text-brand-600" />
+                      <Phone className="w-3.5 h-3.5 text-[#072444]" />
                       <span>{t('hero.ctaCall')}</span>
                     </a>
 
@@ -121,7 +121,7 @@ export default function Contact() {
                       href={whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-colors"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
                       <span>WhatsApp</span>
@@ -132,13 +132,13 @@ export default function Contact() {
             </div>
 
             {/* Consultation Hours Schedule Card */}
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-soft">
+            <div className="bg-white/95 p-6 rounded-2xl border border-[#8DD0F5]/45 shadow-[0_4px_20px_rgba(74,155,218,0.06)] hover:border-[#4A9BDA] transition-all">
               <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0 border border-brand-100">
-                  <Clock className="w-5 h-5" />
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#8DD0F5]/30 to-[#78C4EF]/15 text-[#072444] flex items-center justify-center shrink-0 border border-[#8DD0F5]/60 shadow-sm">
+                  <Clock className="w-5 h-5 text-[#072444]" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-sm font-bold text-navy-900 mb-2">
+                  <h4 className="text-sm font-bold text-[#072444] mb-2">
                     {t('contact.hoursTitle')}
                   </h4>
                   <ul className="space-y-1.5 text-xs text-slate-600">
@@ -163,7 +163,7 @@ export default function Contact() {
               href={clinicData.facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white shadow-soft transition-all"
+              className="flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-[#0c3966] hover:from-blue-700 hover:to-[#072444] text-white shadow-soft transition-all"
             >
               <div className="flex items-center gap-3">
                 <Facebook className="w-5 h-5" />
@@ -176,7 +176,7 @@ export default function Contact() {
 
           {/* Right Column: Google Maps Embed Card */}
           <div className="lg:col-span-7 h-full">
-            <div className="bg-white rounded-3xl p-3 border border-slate-200/90 shadow-soft-lg h-full flex flex-col">
+            <div className="bg-white/95 rounded-3xl p-3 border border-[#8DD0F5]/50 shadow-[0_8px_30px_rgba(74,155,218,0.12)] h-full flex flex-col">
               <div className="relative w-full h-[380px] sm:h-[480px] rounded-2xl overflow-hidden bg-slate-100">
                 <iframe
                   title="Abrar Active Dental Google Maps Location"
@@ -193,7 +193,7 @@ export default function Contact() {
 
               <div className="p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white">
                 <div>
-                  <h4 className="text-sm font-bold text-navy-900">
+                  <h4 className="text-sm font-bold text-[#072444]">
                     {isBn ? clinicData.nameBn : clinicData.name}
                   </h4>
                   <p className="text-xs text-slate-500">
@@ -205,7 +205,7 @@ export default function Contact() {
                   href={clinicData.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-brand-700 bg-brand-50 hover:bg-brand-100 rounded-xl transition-colors min-h-[40px]"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-[#072444] bg-[#8DD0F5]/25 hover:bg-[#8DD0F5]/40 border border-[#78C4EF]/60 rounded-full transition-colors min-h-[40px]"
                 >
                   <span>{t('contact.getDirections')}</span>
                   <ExternalLink className="w-3.5 h-3.5" />

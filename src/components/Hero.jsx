@@ -1,5 +1,15 @@
-import React from 'react';
-import { Calendar, Phone, MessageCircle, ArrowUpRight, ShieldCheck, Award, Sparkles, HeartHandshake, CheckCircle2, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import {
+  Calendar,
+  Phone,
+  MessageCircle,
+  ArrowUpRight,
+  MapPin,
+  ArrowDown,
+  Check,
+  Sparkles
+} from 'lucide-react';
 import { clinicData } from '../data/clinic';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useOpenNow } from '../hooks/useOpenNow';
@@ -10,6 +20,120 @@ export default function Hero() {
   const { t, isBn, language } = useLanguage();
   const openStatus = useOpenNow();
   const whatsappUrl = generateGeneralWhatsAppUrl(language);
+  const prefersReducedMotion = useReducedMotion();
+
+  // 5 Rich Curated Dental Showcase Slides
+  const heroSlides = [
+    {
+      id: 'tooth',
+      image: '/images/hero-perfect-tooth.jpg',
+      alt: 'Precision 3D CAD/CAM anatomical molar tooth model',
+      isTooth: true,
+      tag: isBn ? '৩ডি ডিজিটাল প্ল্যানিং' : '3D CAD/CAM RESTORATION',
+      badge: isBn ? '৩ডি নিখুঁত স্মাইল কেয়ার' : '3D Restorative Precision',
+      card1: {
+        title: t('hero.minimalCard1Title'),
+        desc: t('hero.minimalCard1Desc'),
+      },
+      card2: {
+        title: t('hero.minimalCard2Title'),
+        desc: t('hero.minimalCard2Desc'),
+      },
+    },
+    {
+      id: 'smile',
+      image: '/images/hero-patient-smile.jpg',
+      alt: 'Radiant healthy confident patient smile',
+      isTooth: false,
+      tag: isBn ? 'প্রাকৃতিক সুন্দর হাসি' : 'NATURAL CONFIDENT SMILE',
+      badge: isBn ? 'বাস্তব রোগীর ফলাফল' : 'Verified Patient Smile',
+      card1: {
+        title: isBn ? 'উজ্জ্বল হাসি' : 'Radiant Smiles',
+        desc: isBn ? 'প্রাকৃতিক সৌন্দর্য' : 'Natural Aesthetics',
+      },
+      card2: {
+        title: isBn ? '১০০% সন্তুষ্টি' : '100% Verified',
+        desc: isBn ? 'রোগীর পূর্ণ আস্থা' : 'Happy Patients',
+      },
+    },
+    {
+      id: 'checkup',
+      image: '/images/hero-caring-checkup.jpg',
+      alt: 'Gentle dentist consulting patient with digital X-ray',
+      isTooth: false,
+      tag: isBn ? 'ডিজিটাল ডায়াগনোসিস' : 'LOW-RADIATION DIGITAL X-RAY',
+      badge: isBn ? 'ব্যথাহীন পরামর্শ' : 'Gentle Diagnosis',
+      card1: {
+        title: isBn ? 'ডিজিটাল এক্স-রে' : 'Digital X-Ray',
+        desc: isBn ? 'কম রেডিয়েশন স্ক্যান' : 'Low-Radiation Scan',
+      },
+      card2: {
+        title: isBn ? 'কোমল যত্ন' : 'Gentle Care',
+        desc: isBn ? 'ব্যথাহীন পরামর্শ' : 'Patient-First Ethics',
+      },
+    },
+    {
+      id: 'dentist',
+      image: '/images/hero-dentist-main.jpg',
+      alt: 'Experienced dental surgeon in modern digital clinic',
+      isTooth: false,
+      tag: isBn ? 'বিএমডিসি স্বীকৃত সার্জন' : 'BMDC REGISTERED SURGEON',
+      badge: isBn ? 'আধুনিক ক্লিনিক স্যুট' : 'Senior Dental Surgeon',
+      card1: {
+        title: isBn ? 'দক্ষ সার্জন' : 'Senior Surgeon',
+        desc: isBn ? 'বিএমডিসি স্বীকৃত' : 'BMDC Registered',
+      },
+      card2: {
+        title: isBn ? 'আধুনিক সরঞ্জাম' : 'Modern Suite',
+        desc: isBn ? 'ডিজিটাল স্ক্যানার' : '3D Digital Scanner',
+      },
+    },
+    {
+      id: 'sterile',
+      image: '/images/hero-sterile-tech.jpg',
+      alt: 'Sterile autoclave sealed instruments in modern clinic operatory',
+      isTooth: false,
+      tag: isBn ? '১০০% জীবাণুমুক্ত' : 'HOSPITAL-GRADE CLASS-B',
+      badge: isBn ? 'আন্তর্জাতিক স্বাস্থ্যবিধি' : '100% Sterile Autoclave',
+      card1: {
+        title: isBn ? '১০০% জীবাণুমুক্ত' : '100% Sterile',
+        desc: isBn ? 'হাসপাতাল গ্রেড মান' : 'Class-B Autoclave',
+      },
+      card2: {
+        title: isBn ? 'নিরাপদ সেবা' : 'Zero Infection',
+        desc: isBn ? 'জীবাণুমুক্ত যন্ত্রপাতি' : 'Hospital Standards',
+      },
+    },
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Fast initial transition (1.2s on page entry so user immediately sees active sliding animation),
+  // then regular 2.5s cadence continuously.
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const initialDelay = currentSlide === 0 ? 1200 : 2500;
+    const timer = setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, initialDelay);
+    return () => clearTimeout(timer);
+  }, [currentSlide, prefersReducedMotion, heroSlides.length]);
+
+  const goToSlide = (idx) => {
+    setCurrentSlide(idx);
+  };
+
+  const nextSlide = (e) => {
+    if (e) e.stopPropagation();
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = (e) => {
+    if (e) e.stopPropagation();
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
+  const activeSlide = heroSlides[currentSlide];
 
   const handleBookClick = (e) => {
     e.preventDefault();
@@ -19,202 +143,447 @@ export default function Hero() {
     }
   };
 
+  const handleScrollExplore = () => {
+    const target = document.getElementById('services') || document.getElementById('why-us');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Continuous Highlight Ticker Items
+  const tickerItems = isBn
+    ? [
+        '৩ডি নিখুঁত ডেন্টাল প্ল্যানিং',
+        'কম রেডিয়েশন ডিজিটাল এক্স-রে',
+        'বিএমডিসি স্বীকৃত ডেন্টাল সার্জন',
+        '১০০% ক্লাস-বি অটোক্লেভ জীবাণুমুক্তকরণ',
+        'ব্যথাহীন আরামদায়ক ডেন্টাল সেবা',
+        'প্রাকৃতিক উজ্জ্বল হাসির নিখুঁত যত্ন',
+      ]
+    : [
+        '3D CAD/CAM Digital Planning',
+        'Low-Radiation Digital Panoramic X-Ray',
+        'BMDC Registered Dental Surgeons',
+        '100% Class-B Autoclave Hospital Sterilization',
+        'Painless Comfort & Patient-First Care',
+        'Natural Confident Smile Makeovers',
+      ];
+
   return (
-    <section id="hero" className="relative flex flex-col justify-between overflow-hidden bg-slate-950 text-white min-h-[auto] lg:min-h-[92vh] lg:justify-center">
-      {/* High-Definition Authentic Clinic Operatory Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={getAssetUrl('/images/hero-cover.jpg')}
-          alt="Abrar Active Dental Modern Operatory Clinic Suite at Kalshi, Mirpur"
-          width="1920"
-          height="1080"
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover object-[72%_center] sm:object-center brightness-[0.55] contrast-[1.10] scale-100"
+    <section
+      id="hero"
+      aria-label="Hero Section"
+      className="relative min-h-[calc(100vh-64px)] flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#4A9BDA] via-[#78C4EF] to-[#8DD0F5] text-white pt-1.5 sm:pt-2 pb-2 sm:pb-2.5 selection:bg-brand-900 selection:text-white"
+    >
+      {/* Luminous Ambient Radial Glow Behind Center Stage */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 70% 60% at 50% 52%, rgba(255, 255, 255, 0.42) 0%, rgba(165, 222, 255, 0.22) 50%, transparent 78%)',
+          }}
         />
+        <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-slate-900/10 to-transparent" />
       </div>
 
-      {/* Balanced Artistic Dark Gradient Overlays for High Legibility */}
-      <div className="absolute inset-0 z-10 bg-slate-950/70" />
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/85" />
-      <div
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 45%, rgba(2, 6, 23, 0.45) 0%, rgba(2, 6, 23, 0.85) 80%)'
-        }}
-      />
-
-      {/* Atmospheric Glowing Accent Orbs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 sm:w-[32rem] sm:h-[32rem] bg-cyan-500/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-brand-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-10 left-10 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Foreground Content Container */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-28 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-10 w-full flex flex-col justify-between min-h-[auto] lg:min-h-[88vh]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between items-center text-center">
         
-        {/* Main Hero Content Information (Center Aligned) */}
-        <div className="max-w-4xl mx-auto text-center my-auto pt-2 sm:pt-4 flex flex-col items-center">
-          
-          {/* Top Pill Badges Row */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-            {/* Live Open/Closed Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/20 text-white shadow-lg transition-all">
-              <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5 shrink-0">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${openStatus.isOpen ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-                <span className={`relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 ${openStatus.isOpen ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-              </span>
-              <span className="font-semibold text-white tracking-wide">
-                {isBn ? openStatus.labelBn : openStatus.labelEn}
-              </span>
-              <span className="text-white/40">·</span>
-              <span className="text-slate-300 font-normal text-[11px] sm:text-xs">
-                {isBn ? openStatus.detailBn : openStatus.detailEn}
-              </span>
-            </div>
-
-            {/* Location / Area Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-cyan-950/60 text-cyan-200 border border-cyan-500/30 backdrop-blur-md">
-              <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-              <span>{isBn ? 'কালশী, মিরপুর ১২' : 'Kalshi, Mirpur-12'}</span>
-            </div>
-          </div>
-
-          {/* Main Editorial Headline */}
-          <h1 className="text-2xl min-[380px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] font-black tracking-tight text-white leading-[1.15] sm:leading-[1.12] mb-4 sm:mb-5 drop-shadow-md text-center max-w-3xl">
-            <span className="block">{t('hero.titlePrefix')}</span>
-            <span className="block mt-1 sm:mt-2 text-transparent bg-clip-text bg-gradient-to-r from-teal-200 via-cyan-300 to-sky-200 font-display">
-              {t('hero.titleHighlight')}
+        {/* ========================================================= */}
+        {/* TOP STATUS & LOCATION PILL */}
+        {/* ========================================================= */}
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-wrap items-center justify-center gap-2 mb-1 sm:mb-1.5"
+        >
+          {/* Live Open / Closed Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-md border border-white/30 shadow-sm text-white">
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span
+                className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                  openStatus.isOpen ? 'bg-emerald-300' : 'bg-amber-300'
+                }`}
+              />
+              <span
+                className={`relative inline-flex rounded-full h-2 w-2 ${
+                  openStatus.isOpen ? 'bg-emerald-300' : 'bg-amber-300'
+                }`}
+              />
             </span>
-          </h1>
+            <span className="font-bold text-white tracking-wide">
+              {isBn ? openStatus.labelBn : openStatus.labelEn}
+            </span>
+            <span className="text-white/50">·</span>
+            <span className="text-white/90 font-normal text-[11px]">
+              {isBn ? openStatus.detailBn : openStatus.detailEn}
+            </span>
+          </div>
 
-          {/* Reassuring Subtext */}
-          <p className="text-xs min-[380px]:text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed mb-5 sm:mb-6 max-w-2xl mx-auto font-normal drop-shadow text-center">
-            {t('hero.subtext')}
-          </p>
+          {/* Location Badge */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-medium bg-white/15 backdrop-blur-md text-white border border-white/25 shadow-sm">
+            <MapPin className="w-3.5 h-3.5 text-cyan-200 shrink-0" />
+            <span>{isBn ? 'কালশী, মিরপুর ১২' : 'Kalshi, Mirpur-12'}</span>
+          </div>
+        </motion.div>
 
-          {/* Key Clinical Trust Micro-Points */}
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 sm:gap-y-2.5 mb-6 sm:mb-8 text-xs sm:text-sm text-slate-300">
-            <div className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-400 shrink-0" />
-              <span>{t('hero.bullet1')}</span>
+        {/* ========================================================= */}
+        {/* EDITORIAL MINIMAL TYPOGRAPHY */}
+        {/* ========================================================= */}
+        <div className="max-w-3xl mx-auto pt-0.5">
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.24em] text-white/90 mb-1 drop-shadow-sm"
+          >
+            {t('hero.minimalEyebrow')}
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+            className="text-2xl min-[400px]:text-3xl sm:text-4xl lg:text-[2.45rem] font-bold tracking-tight text-white drop-shadow-[0_2px_14px_rgba(15,23,42,0.25)] leading-[1.14] mb-1"
+          >
+            <span className="block">{t('hero.minimalTitle1')}</span>
+            <span className="block mt-0.5">{t('hero.minimalTitle2')}</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.15 }}
+            className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-xl mx-auto font-normal px-2 drop-shadow-sm"
+          >
+            {t('hero.minimalSubtext')}
+          </motion.p>
+        </div>
+
+        {/* ========================================================= */}
+        {/* 3D MULTI-IMAGE STAGE CAROUSEL (Active and visible on entry) */}
+        {/* ========================================================= */}
+        <div className="relative w-full max-w-5xl mx-auto my-auto py-0.5 flex flex-col items-center justify-center">
+          
+          {/* Main 3D Stage: Displays Center Card + Visible Left & Right Cards */}
+          <div className="relative w-full h-[255px] min-[400px]:h-[280px] sm:h-[315px] md:h-[340px] lg:h-[360px] flex items-center justify-center overflow-visible my-0.5 sm:my-1">
+            
+            {/* Ambient Cyan Radial Glow Behind Center Visual */}
+            <div className="absolute inset-x-1/4 inset-y-4 rounded-full bg-cyan-200/40 blur-3xl pointer-events-none -z-10" />
+
+            {/* Render All Cards with 3D Depth & Continuous Animated Positions */}
+            {heroSlides.map((slide, idx) => {
+              const total = heroSlides.length;
+              let diff = (idx - currentSlide) % total;
+              if (diff < -Math.floor(total / 2)) diff += total;
+              if (diff > Math.floor(total / 2)) diff -= total;
+
+              const isCenter = diff === 0;
+              const isRight = diff === 1;
+              const isLeft = diff === -1;
+              const isVisible = Math.abs(diff) <= 1;
+
+              // Responsive dynamic position styles
+              // diff === 0: Center, scale 1.0, z 30
+              // diff === 1: Right, scale 0.82, z 20, x ~70%
+              // diff === -1: Left, scale 0.82, z 20, x ~-70%
+              const xPos =
+                diff === 0
+                  ? '0%'
+                  : diff === 1
+                  ? '70%'
+                  : diff === -1
+                  ? '-70%'
+                  : diff > 1
+                  ? '135%'
+                  : '-135%';
+
+              const cardScale = isCenter ? 1 : isVisible ? 0.82 : 0.6;
+              const cardOpacity = isCenter ? 1 : isVisible ? 0.72 : 0;
+              const cardRotate = isCenter ? 0 : diff === 1 ? 3 : diff === -1 ? -3 : 0;
+              const cardZIndex = isCenter ? 30 : isVisible ? 20 : 10;
+
+              return (
+                <motion.div
+                  key={slide.id}
+                  animate={{
+                    x: xPos,
+                    scale: cardScale,
+                    opacity: cardOpacity,
+                    rotate: cardRotate,
+                    zIndex: cardZIndex,
+                  }}
+                  transition={{
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  onClick={() => {
+                    if (isRight) nextSlide();
+                    if (isLeft) prevSlide();
+                  }}
+                  className={`absolute w-[260px] h-[230px] min-[400px]:w-[300px] min-[400px]:h-[260px] sm:w-[370px] sm:h-[295px] md:w-[415px] md:h-[320px] lg:w-[450px] lg:h-[345px] flex items-center justify-center select-none transition-shadow ${
+                    isCenter
+                      ? 'cursor-default pointer-events-auto'
+                      : isVisible
+                      ? 'cursor-pointer hover:opacity-90 active:scale-95 pointer-events-auto'
+                      : 'pointer-events-none'
+                  }`}
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  {slide.isTooth ? (
+                    /* Grand 3D Tooth Artwork with Seamless Radial Feather Blend */
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      <img
+                        src={getAssetUrl(slide.image)}
+                        alt={slide.alt}
+                        className="w-full h-full object-contain filter drop-shadow-[0_20px_42px_rgba(7,36,68,0.3)]"
+                        style={{
+                          maskImage:
+                            'radial-gradient(circle at 50% 48%, black 48%, rgba(0, 0, 0, 0.7) 60%, transparent 74%)',
+                          WebkitMaskImage:
+                            'radial-gradient(circle at 50% 48%, black 48%, rgba(0, 0, 0, 0.7) 60%, transparent 74%)',
+                        }}
+                        loading="eager"
+                      />
+                      {/* Pill Badge at the bottom of the tooth */}
+                      <div className="absolute bottom-2 inset-x-8 flex items-center justify-center px-3 py-1 rounded-full bg-slate-950/50 backdrop-blur-md border border-white/25 text-white text-[10px] sm:text-xs font-semibold shadow-md">
+                        <span className="truncate">{slide.tag}</span>
+                      </div>
+                    </div>
+                  ) : (
+                    /* Luxury Photographic Clinical Showcase Card with Glass Border */
+                    <div className="relative w-full h-full rounded-3xl sm:rounded-[36px] overflow-hidden shadow-[0_22px_45px_rgba(7,36,68,0.25)] border-2 border-white/65 backdrop-blur-md">
+                      <img
+                        src={getAssetUrl(slide.image)}
+                        alt={slide.alt}
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#072444]/65 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-sky-900/10 pointer-events-none" />
+
+                      {/* Pill Badge on Card */}
+                      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/65 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-semibold">
+                        <span className="truncate">{slide.tag}</span>
+                        <span className="text-cyan-300 font-bold ml-1 shrink-0">✦</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Neighbor Preview Mini Badges */}
+                  {isLeft && (
+                    <div className="absolute top-3 left-3 px-2 py-0.5 rounded-full bg-slate-950/70 backdrop-blur-md text-[9px] font-bold text-white border border-white/20 shadow-md">
+                      Prev
+                    </div>
+                  )}
+                  {isRight && (
+                    <div className="absolute top-3 right-3 px-2 py-0.5 rounded-full bg-slate-950/70 backdrop-blur-md text-[9px] font-bold text-white border border-white/20 shadow-md">
+                      Next
+                    </div>
+                  )}
+
+                  {/* Center Card Floating Pills (Desktop) */}
+                  {isCenter && (
+                    <>
+                      {/* Left Pill */}
+                      <motion.div
+                        key={`pill1-${slide.id}`}
+                        initial={{ opacity: 0, x: -14 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35 }}
+                        className="hidden md:flex absolute top-[44%] -translate-y-1/2 -left-10 lg:-left-20 xl:-left-24 z-40 items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/50 hover:bg-white/65 backdrop-blur-xl border border-white/70 shadow-[0_12px_28px_rgba(7,36,68,0.14)]"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-[#072444] text-white flex items-center justify-center shrink-0 shadow-md">
+                          <Check className="w-4 h-4 stroke-[2.5]" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-xs sm:text-sm font-bold text-slate-950 leading-tight">
+                            {slide.card1.title}
+                          </p>
+                          <p className="text-[11px] text-slate-900/90 font-medium mt-0.5 whitespace-nowrap">
+                            {slide.card1.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+
+                      {/* Right Pill */}
+                      <motion.div
+                        key={`pill2-${slide.id}`}
+                        initial={{ opacity: 0, x: 14 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.35 }}
+                        className="hidden md:flex absolute top-[48%] -translate-y-1/2 -right-10 lg:-right-20 xl:-right-24 z-40 items-center gap-3 px-4 py-2.5 rounded-2xl bg-white/50 hover:bg-white/65 backdrop-blur-xl border border-white/70 shadow-[0_12px_28px_rgba(7,36,68,0.14)]"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-white text-slate-950 flex items-center justify-center shrink-0 shadow-sm border border-slate-200">
+                          <Check className="w-4 h-4 stroke-[2.5]" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-xs sm:text-sm font-bold text-slate-950 leading-tight">
+                            {slide.card2.title}
+                          </p>
+                          <p className="text-[11px] text-slate-900/90 font-medium mt-0.5 whitespace-nowrap">
+                            {slide.card2.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    </>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Story-Style Real-time Animated Segmented Progress Bars */}
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/45 backdrop-blur-md border border-white/20 shadow-md mt-1 z-30">
+            {heroSlides.map((slide, idx) => (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => goToSlide(idx)}
+                aria-label={`Slide ${idx + 1}`}
+                className="relative h-1.5 w-7 sm:w-9 rounded-full bg-white/25 overflow-hidden transition-all focus:outline-none"
+              >
+                {idx === currentSlide ? (
+                  <motion.div
+                    key={`progress-${currentSlide}`}
+                    initial={{ width: '0%' }}
+                    animate={{ width: '100%' }}
+                    transition={{
+                      duration: currentSlide === 0 ? 1.2 : 2.5,
+                      ease: 'linear',
+                    }}
+                    className="absolute inset-0 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                  />
+                ) : idx < currentSlide ? (
+                  <div className="absolute inset-0 bg-white/80 rounded-full" />
+                ) : null}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Floating Pills Row (< md) */}
+          <div className="flex md:hidden items-center justify-center gap-2.5 w-full max-w-sm px-2 mt-2 mb-1 z-30">
+            <div className="flex-1 flex items-center gap-2 p-2 rounded-xl bg-white/40 backdrop-blur-md border border-white/50 shadow-sm text-left">
+              <div className="w-6 h-6 rounded-full bg-[#072444] text-white flex items-center justify-center shrink-0 shadow-sm">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-slate-950 truncate">{activeSlide.card1.title}</p>
+                <p className="text-[10px] text-slate-900/90 truncate">{activeSlide.card1.desc}</p>
+              </div>
             </div>
-            <div className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 shrink-0" />
-              <span>{t('hero.bullet2')}</span>
-            </div>
-            <div className="inline-flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-sky-400 shrink-0" />
-              <span>{t('hero.bullet3')}</span>
+            <div className="flex-1 flex items-center gap-2 p-2 rounded-xl bg-white/40 backdrop-blur-md border border-white/50 shadow-sm text-left">
+              <div className="w-6 h-6 rounded-full bg-white text-slate-950 flex items-center justify-center shrink-0 shadow-sm border border-slate-200">
+                <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-bold text-slate-950 truncate">{activeSlide.card2.title}</p>
+                <p className="text-[10px] text-slate-900/90 truncate">{activeSlide.card2.desc}</p>
+              </div>
             </div>
           </div>
 
-          {/* Action Buttons Group (Centered) */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 sm:gap-4 mb-2 sm:mb-4 w-full sm:w-auto">
-            {/* Primary Appointment Button */}
+          {/* Primary Centered Action Button & Contact Row */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.45, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center gap-2 z-30 mt-1 sm:mt-1.5"
+          >
+            {/* Main "Book a Consultation" Pill Button */}
             <a
               href="#appointment"
               onClick={handleBookClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:px-8 sm:py-4 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-brand-600 via-dental-500 to-brand-600 hover:from-brand-500 hover:to-dental-400 rounded-2xl shadow-xl shadow-brand-500/30 hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px] border border-cyan-400/40 group"
+              className="inline-flex items-center justify-center gap-2 px-8 py-2.5 sm:py-3 text-sm sm:text-base font-bold text-white bg-[#072444] hover:bg-[#0c3966] active:scale-95 rounded-full shadow-[0_12px_28px_rgba(7,36,68,0.38)] hover:shadow-[0_16px_34px_rgba(7,36,68,0.5)] hover:scale-105 transition-all min-h-[44px] border border-cyan-300/30"
             >
-              <Calendar className="w-5 h-5 text-cyan-200 group-hover:scale-110 transition-transform" />
-              <span>{t('hero.ctaBook')}</span>
+              <Calendar className="w-4 h-4 text-cyan-200" />
+              <span>{t('hero.minimalCta')}</span>
             </a>
 
-            {/* Mobile 2-col Secondary Buttons Row */}
-            <div className="grid grid-cols-2 sm:flex sm:items-center justify-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-              {/* Secondary Call Clinic Button */}
+            {/* Quick Contact Buttons Row */}
+            <div className="hidden sm:flex items-center gap-2">
               <a
                 href={`tel:${clinicData.phoneRaw}`}
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm md:text-base font-bold text-white hover:text-cyan-200 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-white/40 rounded-2xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all min-h-[48px]"
+                aria-label="Call Clinic"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-slate-950 bg-white/45 hover:bg-white/65 backdrop-blur-md border border-white/60 shadow-sm hover:scale-105 active:scale-95 transition-all"
               >
-                <Phone className="w-4 h-4 text-cyan-300 shrink-0" />
-                <span className="truncate">{t('hero.ctaCall')}</span>
+                <Phone className="w-3.5 h-3.5 text-slate-950" />
+                <span>{t('hero.ctaCall')}</span>
               </a>
 
-              {/* WhatsApp Quick Action Button */}
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-3 sm:px-5 sm:py-4 rounded-2xl text-xs sm:text-sm font-semibold text-emerald-300 bg-emerald-950/70 hover:bg-emerald-900/80 backdrop-blur-xl border border-emerald-500/40 hover:border-emerald-400 shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+                aria-label="Chat on WhatsApp"
+                className="inline-flex items-center gap-1 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold text-emerald-950 bg-emerald-100/75 hover:bg-emerald-100/95 backdrop-blur-md border border-emerald-300/60 shadow-sm hover:scale-105 active:scale-95 transition-all"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-700" />
                 <span>WhatsApp</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <ArrowUpRight className="w-3 h-3 text-emerald-700" />
               </a>
             </div>
+          </motion.div>
+
+          {/* Continuous Silky-Smooth Dental Highlights Marquee Ribbon */}
+          <div className="relative w-full max-w-4xl mx-auto overflow-hidden py-1 px-2 my-1 pointer-events-none select-none">
+            <div className="flex w-max items-center gap-4 sm:gap-6 animate-marquee">
+              {tickerItems.concat(tickerItems).map((item, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-semibold text-white/90 uppercase tracking-wider whitespace-nowrap bg-white/15 backdrop-blur-md px-3 py-0.5 rounded-full border border-white/25 shadow-sm"
+                >
+                  <Sparkles className="w-3 h-3 text-cyan-200 shrink-0" />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
         </div>
 
-        {/* Artistic Trust Glassmorphism Cards Bar */}
-        <div className="w-full pt-6 sm:pt-8 pb-2 max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-            
-            {/* Card 1: Sterilization */}
-            <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 transition-all shadow-lg hover:-translate-y-0.5">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-teal-400/20 border border-teal-300/30 flex items-center justify-center text-teal-300 shrink-0">
-                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-white truncate">{t('hero.trustChip1')}</p>
-                <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">{isBn ? 'আন্তর্জাতিক অটোক্লেভ' : 'Hospital Grade'}</p>
-              </div>
-            </div>
-
-            {/* Card 2: BMDC Registered */}
-            <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 transition-all shadow-lg hover:-translate-y-0.5">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-400/20 border border-cyan-300/30 flex items-center justify-center text-cyan-300 shrink-0">
-                <Award className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-white truncate">{t('hero.trustChip2')}</p>
-                <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">{isBn ? 'বিএমডিসি স্বীকৃত সার্জন' : 'Certified Surgeons'}</p>
-              </div>
-            </div>
-
-            {/* Card 3: Modern Equipment */}
-            <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 transition-all shadow-lg hover:-translate-y-0.5">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-400/20 border border-sky-300/30 flex items-center justify-center text-sky-300 shrink-0">
-                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-white truncate">{t('hero.trustChip3')}</p>
-                <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">{isBn ? 'ডিজিটাল ডেন্টাল সরঞ্জাম' : 'Modern Suite'}</p>
-              </div>
-            </div>
-
-            {/* Card 4: Gentle Care */}
-            <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-white/10 hover:bg-white/15 backdrop-blur-xl border border-white/15 transition-all shadow-lg hover:-translate-y-0.5">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-rose-400/20 border border-rose-300/30 flex items-center justify-center text-rose-300 shrink-0">
-                <HeartHandshake className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs sm:text-sm font-bold text-white truncate">{t('hero.trustChip4')}</p>
-                <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">{isBn ? 'ব্যথাহীন ও কোমল যত্ন' : 'Gentle Care'}</p>
-              </div>
-            </div>
-
+        {/* ========================================================= */}
+        {/* MINIMAL BOTTOM BAR: Metric Stats, Services & Scroll Explore */}
+        {/* ========================================================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.35 }}
+          className="w-full pt-1.5 sm:pt-2 pb-0.5 border-t border-white/25 flex flex-col md:flex-row items-center justify-between gap-2 text-white"
+        >
+          {/* Bottom Left: Patient Metric */}
+          <div className="text-center md:text-left">
+            <p className="text-xl sm:text-2xl font-black text-white tracking-tight font-display leading-tight drop-shadow-sm">
+              {t('hero.minimalBottomStatsNum')}
+            </p>
+            <p className="text-xs text-white/90 font-medium">
+              {t('hero.minimalBottomStatsLabel')}
+            </p>
           </div>
-        </div>
+
+          {/* Bottom Center: Key Clinical Pillars */}
+          <div className="text-center">
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/90 drop-shadow-sm">
+              {t('hero.minimalServicesList')}
+            </p>
+          </div>
+
+          {/* Bottom Right: Circular "SCROLL TO EXPLORE" Trigger */}
+          <button
+            type="button"
+            onClick={handleScrollExplore}
+            aria-label={t('hero.minimalScroll')}
+            className="group flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white hover:text-cyan-100 transition-colors focus:outline-none"
+          >
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/60 flex items-center justify-center text-white group-hover:border-white group-hover:scale-110 transition-all">
+              <ArrowDown className="w-3.5 h-3.5 text-white animate-bounce" />
+            </div>
+            <span className="text-[10px] sm:text-[11px] drop-shadow-sm">{t('hero.minimalScroll')}</span>
+          </button>
+        </motion.div>
 
       </div>
-
-      {/* Vertical Scroll Down Indicator (Desktop) */}
-      <button
-        type="button"
-        onClick={() => document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' })}
-        aria-label={isBn ? 'নিচে স্ক্রোল করুন' : 'Scroll down to explore'}
-        className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-1.5 text-white/70 hover:text-white transition-colors group focus:outline-none"
-      >
-        <div className="w-5 h-7 rounded-full border-2 border-white/30 flex items-start justify-center p-1 group-hover:border-white/60 transition-colors">
-          <div className="w-1 h-2 rounded-full bg-cyan-400 animate-bounce" />
-        </div>
-      </button>
-
-      {/* Smooth Blend to the Next Section */}
-      <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-slate-900/60 to-transparent z-10 pointer-events-none" />
     </section>
   );
 }
-

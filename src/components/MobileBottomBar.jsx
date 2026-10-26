@@ -20,16 +20,16 @@ export default function MobileBottomBar() {
   return (
     <nav
       aria-label="Quick Mobile Actions"
-      className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-floating px-3 py-2 pb-safe"
+      className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-md border-t border-sky-100 shadow-[0_-4px_20px_rgba(7,36,68,0.06)] px-3 py-2 pb-safe"
     >
       <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
         {/* Call Now */}
         <a
           href={`tel:${clinicData.phoneRaw}`}
-          className="flex flex-col items-center justify-center py-2 px-1 text-slate-700 hover:text-brand-600 active:scale-95 transition-transform min-h-[48px] rounded-xl hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="flex flex-col items-center justify-center py-2 px-1 text-slate-700 hover:text-[#072444] active:scale-95 transition-transform min-h-[48px] rounded-xl hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-sky-400"
           aria-label="Call clinic directly"
         >
-          <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center mb-1 text-brand-700">
+          <div className="w-8 h-8 rounded-full bg-sky-50 flex items-center justify-center mb-1 text-[#072444] border border-sky-100">
             <Phone className="w-4 h-4" />
           </div>
           <span className="text-[11px] font-semibold leading-none">{t('mobileBar.call')}</span>
@@ -53,13 +53,13 @@ export default function MobileBottomBar() {
         <Link
           to="/#appointment"
           onClick={handleBookClick}
-          className="flex flex-col items-center justify-center py-2 px-1 text-brand-700 hover:text-brand-800 active:scale-95 transition-transform min-h-[48px] rounded-xl bg-brand-50 hover:bg-brand-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="flex flex-col items-center justify-center py-2 px-1 text-[#072444] hover:text-[#0c3966] active:scale-95 transition-transform min-h-[48px] rounded-xl bg-sky-50/70 hover:bg-sky-100/80 focus:outline-none focus:ring-2 focus:ring-sky-400 border border-sky-100"
           aria-label="Jump to appointment booking form"
         >
-          <div className="w-8 h-8 rounded-full bg-brand-600 flex items-center justify-center mb-1 text-white shadow-sm">
-            <Calendar className="w-4 h-4" />
+          <div className="w-8 h-8 rounded-full bg-[#072444] flex items-center justify-center mb-1 text-white shadow-sm shadow-[#072444]/20">
+            <Calendar className="w-4 h-4 text-cyan-200" />
           </div>
-          <span className="text-[11px] font-bold leading-none text-brand-800">{t('mobileBar.book')}</span>
+          <span className="text-[11px] font-bold leading-none text-[#072444]">{t('mobileBar.book')}</span>
         </Link>
       </div>
     </nav>

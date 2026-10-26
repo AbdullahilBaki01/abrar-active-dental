@@ -50,15 +50,15 @@ export default function Services({ onSelectService }) {
   const displayedServices = showAll ? servicesData : servicesData.slice(0, 3);
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-white">
+    <section id="services" className="py-16 sm:py-24 bg-gradient-to-b from-white via-[#8DD0F5]/15 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3.5 py-1 rounded-full border border-brand-100 inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#072444] bg-[#8DD0F5]/30 px-3.5 py-1 rounded-full border border-[#78C4EF]/60 shadow-sm inline-block mb-3">
             {t('services.subtitle')}
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy-900 tracking-tight mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#072444] tracking-tight mb-3">
             {t('services.title')}
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -76,26 +76,26 @@ export default function Services({ onSelectService }) {
             return (
               <div
                 key={service.id}
-                className="group relative bg-white rounded-3xl p-7 border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-brand-400 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                className="group relative bg-white/95 rounded-3xl p-7 border border-[#8DD0F5]/45 shadow-[0_4px_20px_rgba(74,155,218,0.06)] hover:shadow-[0_16px_32px_rgba(74,155,218,0.18)] hover:border-[#4A9BDA] hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
-                {/* Dental cyan hover top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-500 via-dental-400 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Hero sky/light-sky/soft-aqua hover top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#4A9BDA] via-[#78C4EF] to-[#8DD0F5] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 <div>
                   {/* Icon & Duration Header */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-2xl bg-brand-50 border border-brand-100 flex items-center justify-center text-brand-600 group-hover:scale-110 group-hover:bg-brand-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-brand-500/25 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#8DD0F5]/25 to-[#78C4EF]/15 border border-[#8DD0F5]/50 flex items-center justify-center text-[#072444] group-hover:scale-110 group-hover:bg-[#4A9BDA] group-hover:text-white group-hover:border-[#4A9BDA] group-hover:shadow-md group-hover:shadow-[#4A9BDA]/30 transition-all duration-300">
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-100">
-                      <Clock className="w-3 h-3 text-brand-500" />
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#072444] bg-[#8DD0F5]/20 px-2.5 py-1 rounded-lg border border-[#78C4EF]/40">
+                      <Clock className="w-3 h-3 text-[#4A9BDA]" />
                       <span>{service.duration}</span>
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-navy-900 group-hover:text-brand-600 transition-colors mb-2.5">
+                  <h3 className="text-lg font-bold text-[#072444] group-hover:text-[#4A9BDA] transition-colors mb-2.5">
                     {title}
                   </h3>
 
@@ -110,18 +110,18 @@ export default function Services({ onSelectService }) {
                   <button
                     type="button"
                     onClick={() => handleBookService(service.id)}
-                    className="px-4 py-2 text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 active:scale-95 rounded-xl shadow-sm hover:shadow-md hover:shadow-brand-600/20 transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 min-h-[38px]"
+                    className="px-5 py-2 text-xs font-bold text-white bg-gradient-to-r from-[#072444] to-[#0c3966] hover:from-[#4A9BDA] hover:to-[#072444] active:scale-95 rounded-full shadow-sm hover:shadow-md hover:shadow-[#4A9BDA]/25 transition-all focus:outline-none focus:ring-2 focus:ring-[#4A9BDA] min-h-[38px]"
                   >
                     {t('services.bookThis')}
                   </button>
 
                   <Link
                     to={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:text-brand-800 transition-colors py-1 px-2 group/link"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#072444] hover:text-[#4A9BDA] transition-colors py-1 px-2 group/link"
                     title={`Read more about ${title}`}
                   >
                     <span>{t('services.learnMore')}</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform text-[#4A9BDA]" />
                   </Link>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function Services({ onSelectService }) {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold text-brand-700 bg-brand-50 hover:bg-brand-100 active:scale-95 border border-brand-200/90 rounded-2xl shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-[#072444] bg-[#8DD0F5]/25 hover:bg-[#8DD0F5]/40 active:scale-95 border border-[#78C4EF]/60 rounded-full shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#4A9BDA] min-h-[44px]"
             >
               <span>{showAll ? t('services.seeLess') : `${t('services.seeMore')} (${servicesData.length})`}</span>
               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} />

@@ -44,14 +44,28 @@ export default {
           150: '#e9eef4',
         },
         navy: {
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
+          800: '#0c3966',
+          900: '#072444',
+          950: '#041628',
+        },
+        hero: {
+          dark: '#072444',
+          darkHover: '#0c3966',
+          sky: '#4A9BDA',       // Sky Blue (Top)
+          skyMid: '#78C4EF',    // Light Sky Blue (Middle)
+          skyLight: '#8DD0F5',  // Soft Aqua Blue (Bottom)
+          cyan: '#38bdf8',
+          ice: '#e0f2fe',
+        },
+        skyBrand: {
+          deep: '#4A9BDA',      // Sky Blue: #4A9BDA
+          mid: '#78C4EF',       // Light Sky Blue: #78C4EF
+          soft: '#8DD0F5',      // Soft Aqua Blue: #8DD0F5
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Poppins', 'Inter', 'sans-serif'],
+        display: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         bangla: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
       },
       boxShadow: {

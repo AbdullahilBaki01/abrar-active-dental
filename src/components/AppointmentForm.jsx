@@ -113,15 +113,15 @@ export default function AppointmentForm({ initialService = '', initialDoctor = '
   };
 
   return (
-    <section id="appointment" className="py-14 sm:py-20 bg-gradient-to-b from-brand-50/50 to-white">
+    <section id="appointment" className="py-14 sm:py-20 bg-gradient-to-b from-[#8DD0F5]/25 via-sky-50/50 to-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center mb-10 sm:mb-14">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-100 inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#072444] bg-[#8DD0F5]/30 px-3.5 py-1 rounded-full border border-[#78C4EF]/60 shadow-sm inline-block mb-3">
             {t('appointment.subtitle')}
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy-900 tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#072444] tracking-tight mb-4">
             {t('appointment.title')}
           </h2>
           <p className="text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
@@ -130,14 +130,14 @@ export default function AppointmentForm({ initialService = '', initialDoctor = '
         </div>
 
         {/* Appointment Form Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-soft-lg">
+        <div className="bg-white/95 rounded-3xl p-6 sm:p-10 border border-[#8DD0F5]/50 shadow-[0_12px_40px_rgba(74,155,218,0.12)]">
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
               {/* Full Name */}
               <div>
-                <label htmlFor="name" className="block text-xs sm:text-sm font-bold text-navy-900 mb-2">
+                <label htmlFor="name" className="block text-xs sm:text-sm font-bold text-[#072444] mb-2">
                   {t('appointment.nameLabel')} <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
@@ -154,7 +154,7 @@ export default function AppointmentForm({ initialService = '', initialDoctor = '
                     className={`w-full pl-11 pr-4 py-3 rounded-xl border text-sm transition-colors focus:outline-none focus:ring-2 min-h-[48px] ${
                       errors.name
                         ? 'border-rose-400 bg-rose-50/30 focus:ring-rose-400 text-rose-900'
-                        : 'border-slate-300 focus:border-brand-500 focus:ring-brand-500 text-slate-900'
+                        : 'border-slate-300 focus:border-sky-400 focus:ring-sky-400 text-slate-900'
                     }`}
                   />
                 </div>
@@ -319,17 +319,17 @@ export default function AppointmentForm({ initialService = '', initialDoctor = '
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base font-bold text-white bg-brand-600 hover:bg-brand-700 active:scale-[0.99] rounded-xl shadow-lg shadow-brand-600/25 transition-all focus:outline-none focus:ring-3 focus:ring-brand-400 min-h-[50px] disabled:opacity-75"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-9 py-4 text-base font-bold text-white bg-gradient-to-r from-[#072444] via-[#0c3966] to-[#4A9BDA] hover:from-[#4A9BDA] hover:to-[#072444] active:scale-[0.98] rounded-full shadow-lg shadow-[#4A9BDA]/25 transition-all focus:outline-none focus:ring-3 focus:ring-[#4A9BDA] min-h-[50px] disabled:opacity-75"
               >
-                <MessageSquare className="w-5 h-5" />
+                <MessageSquare className="w-5 h-5 text-cyan-200" />
                 <span>{isSubmitting ? t('appointment.sending') : t('appointment.submitBtn')}</span>
               </button>
 
               <a
                 href={`tel:${clinicData.phoneRaw}`}
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-brand-600 p-2 transition-colors"
+                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#072444] p-2 transition-colors"
               >
-                <PhoneCall className="w-4 h-4 text-brand-600" />
+                <PhoneCall className="w-4 h-4 text-sky-600" />
                 <span>{t('appointment.callInstead')}</span>
               </a>
             </div>
@@ -376,9 +376,9 @@ export default function AppointmentForm({ initialService = '', initialDoctor = '
 
               <a
                 href={`tel:${clinicData.phoneRaw}`}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl min-h-[44px]"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-full min-h-[44px]"
               >
-                <Phone className="w-4 h-4 text-brand-600" />
+                <Phone className="w-4 h-4 text-[#072444]" />
                 <span>{t('appointment.successModal.callInsteadBtn')}</span>
               </a>
 

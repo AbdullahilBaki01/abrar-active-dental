@@ -56,7 +56,7 @@ export default function VerticalScrollNav() {
   return (
     <nav
       aria-label={isBn ? 'পৃষ্ঠা স্ক্রোল নেভিগেশন' : 'Page vertical scroll navigation'}
-      className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-3 p-2.5 rounded-full bg-slate-950/65 hover:bg-slate-950/85 backdrop-blur-xl border border-white/15 shadow-2xl transition-all duration-300"
+      className="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex flex-col items-center gap-3 p-2.5 rounded-full bg-[#072444]/80 hover:bg-[#072444]/95 backdrop-blur-xl border border-cyan-300/30 shadow-2xl transition-all duration-300"
     >
       {/* Decorative vertical connecting line */}
       <div className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-[1px] bg-white/10 pointer-events-none -z-10" />
@@ -75,7 +75,7 @@ export default function VerticalScrollNav() {
             className="group relative flex items-center justify-center p-1 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
           >
             {/* Tooltip on Hover */}
-            <span className="absolute right-9 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-900/95 text-white border border-white/15 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl drop-shadow">
+            <span className="absolute right-9 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#072444] text-white border border-cyan-400/30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl drop-shadow">
               {label}
             </span>
 
@@ -83,7 +83,7 @@ export default function VerticalScrollNav() {
             <span
               className={`transition-all duration-300 ${
                 isActive
-                  ? 'h-5 w-2.5 rounded-full bg-gradient-to-b from-teal-300 via-cyan-400 to-brand-500 shadow-md shadow-cyan-400/50'
+                  ? 'h-5 w-2.5 rounded-full bg-gradient-to-b from-sky-300 via-cyan-400 to-[#38bdf8] shadow-md shadow-cyan-400/60'
                   : 'h-2 w-2 rounded-full bg-white/40 hover:bg-white/80 group-hover:scale-125'
               }`}
             />

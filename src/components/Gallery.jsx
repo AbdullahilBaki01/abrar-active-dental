@@ -105,21 +105,21 @@ export default function Gallery() {
   }, [selectedIdx, handlePrev, handleNext]);
 
   return (
-    <section id="gallery" className="py-14 sm:py-20 bg-white">
+    <section id="gallery" className="py-14 sm:py-20 bg-gradient-to-b from-white via-[#8DD0F5]/12 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-50 px-3 py-1 rounded-full border border-brand-100 inline-block mb-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#072444] bg-[#8DD0F5]/30 px-3.5 py-1 rounded-full border border-[#78C4EF]/60 shadow-sm inline-block mb-3">
             {t('gallery.subtitle')}
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy-900 tracking-tight mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#072444] tracking-tight mb-4">
             {t('gallery.title')}
           </h2>
           <p className="text-base text-slate-600 leading-relaxed">
             {t('gallery.desc')}
           </p>
-          <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200/80 rounded-lg py-1 px-3 inline-block mt-3">
+          <p className="text-xs text-[#072444] bg-[#8DD0F5]/20 border border-[#78C4EF]/50 rounded-lg py-1 px-3 inline-block mt-3">
             {t('gallery.placeholderNotice')}
           </p>
         </div>
@@ -136,10 +136,10 @@ export default function Gallery() {
               key={tab.key}
               type="button"
               onClick={() => setActiveFilter(tab.key)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all min-h-[40px] focus:outline-none focus:ring-2 focus:ring-brand-500 ${
+              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all min-h-[40px] focus:outline-none focus:ring-2 focus:ring-[#4A9BDA] ${
                 activeFilter === tab.key
-                  ? 'bg-brand-600 text-white shadow-md shadow-brand-600/20'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  ? 'bg-[#072444] text-white shadow-md shadow-[#072444]/25 border border-cyan-400/30'
+                  : 'bg-[#8DD0F5]/20 text-slate-700 hover:bg-[#8DD0F5]/35 border border-[#78C4EF]/45'
               }`}
             >
               {tab.label}
@@ -157,10 +157,10 @@ export default function Gallery() {
               <div
                 key={item.id}
                 onClick={() => handleOpenLightbox(index)}
-                className="group relative rounded-3xl overflow-hidden bg-white border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-brand-400 hover:-translate-y-2 cursor-pointer transition-all duration-300"
+                className="group relative rounded-3xl overflow-hidden bg-white/95 border border-[#8DD0F5]/45 shadow-[0_4px_20px_rgba(74,155,218,0.06)] hover:shadow-[0_16px_32px_rgba(74,155,218,0.18)] hover:border-[#4A9BDA] hover:-translate-y-2 cursor-pointer transition-all duration-300"
               >
-                {/* Dental cyan hover top accent */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-500 via-dental-400 to-brand-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                {/* Hero sky/light-sky/soft-aqua hover top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#4A9BDA] via-[#78C4EF] to-[#8DD0F5] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
                 <div className="aspect-[4/3] w-full overflow-hidden bg-slate-50">
                   <img
@@ -188,7 +188,7 @@ export default function Gallery() {
 
                 {/* Mobile visible label below image */}
                 <div className="p-4 bg-white border-t border-slate-100 sm:hidden">
-                  <h3 className="text-xs font-bold text-navy-900">{title}</h3>
+                  <h3 className="text-xs font-bold text-[#072444]">{title}</h3>
                   <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">{desc}</p>
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Gallery() {
             <button
               type="button"
               onClick={() => setShowAll((prev) => !prev)}
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold text-brand-700 bg-brand-50 hover:bg-brand-100 active:scale-95 border border-brand-200/90 rounded-2xl shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-brand-500 min-h-[44px]"
+              className="inline-flex items-center gap-2 px-7 py-3 text-sm font-bold text-[#072444] bg-[#8DD0F5]/25 hover:bg-[#8DD0F5]/40 active:scale-95 border border-[#78C4EF]/60 rounded-full shadow-sm hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#4A9BDA] min-h-[44px]"
             >
               <span>{showAll ? t('gallery.seeLess') : `${t('gallery.seeMore')} (${filteredItems.length})`}</span>
               <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} />

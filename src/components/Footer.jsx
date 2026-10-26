@@ -9,26 +9,26 @@ export default function Footer() {
   const { t, isBn } = useLanguage();
 
   return (
-    <footer className="bg-navy-950 text-slate-300 pt-16 pb-24 md:pb-12 border-t border-navy-900">
+    <footer className="bg-[#041628] text-slate-300 pt-16 pb-24 md:pb-12 border-t border-[#072444]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-sky-950">
           
           {/* Col 1: Brand Info (5 cols) */}
           <div className="lg:col-span-5">
             <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2C8.5 2 6 4.5 6 8c0 4 2 7 3 11 0.5 2 1.5 3 3 3s2.5-1 3-3c1-4 3-7 3-11 0-3.5-2.5-6-6-6z" fill="white" fillOpacity="0.2"/>
+              <div className="w-10 h-10 rounded-2xl bg-[#072444] border border-cyan-400/30 flex items-center justify-center text-white shadow-md">
+                <svg className="w-6 h-6 text-cyan-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2C8.5 2 6 4.5 6 8c0 4 2 7 3 11 0.5 2 1.5 3 3 3s2.5-1 3-3c1-4 3-7 3-11 0-3.5-2.5-6-6-6z" fill="currentColor" fillOpacity="0.15"/>
                   <path d="M12 2C8.5 2 6 4.5 6 8c0 4 2 7 3 11 0.5 2 1.5 3 3 3s2.5-1 3-3c1-4 3-7 3-11 0-3.5-2.5-6-6-6z" />
                 </svg>
               </div>
               <div>
-                <span className="text-xl font-bold text-white block">
+                <span className="text-xl font-black text-white block">
                   {isBn ? clinicData.nameBn : clinicData.name}
                 </span>
-                <span className="text-xs text-brand-400">
+                <span className="text-xs text-sky-400 font-medium">
                   {isBn ? clinicData.taglineBn : clinicData.tagline}
                 </span>
               </div>
@@ -44,14 +44,14 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook Page"
-                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-xl bg-[#072444] hover:bg-sky-600 text-slate-300 hover:text-white flex items-center justify-center border border-sky-400/20 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href={`tel:${clinicData.phoneRaw}`}
                 aria-label="Call clinic"
-                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-xl bg-[#072444] hover:bg-sky-600 text-slate-300 hover:text-white flex items-center justify-center border border-sky-400/20 transition-colors"
               >
                 <Phone className="w-5 h-5" />
               </a>
@@ -65,37 +65,37 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/#hero" className="hover:text-brand-400 transition-colors">
+                <Link to="/#hero" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.home')}
                 </Link>
               </li>
               <li>
-                <Link to="/#services" className="hover:text-brand-400 transition-colors">
+                <Link to="/#services" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.services')}
                 </Link>
               </li>
               <li>
-                <Link to="/#why-us" className="hover:text-brand-400 transition-colors">
+                <Link to="/#why-us" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.whyUs')}
                 </Link>
               </li>
               <li>
-                <Link to="/#doctors" className="hover:text-brand-400 transition-colors">
+                <Link to="/#doctors" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.doctors')}
                 </Link>
               </li>
               <li>
-                <Link to="/#gallery" className="hover:text-brand-400 transition-colors">
+                <Link to="/#gallery" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.gallery')}
                 </Link>
               </li>
               <li>
-                <Link to="/#reviews" className="hover:text-brand-400 transition-colors">
+                <Link to="/#reviews" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.reviews')}
                 </Link>
               </li>
               <li>
-                <Link to="/#contact" className="hover:text-brand-400 transition-colors">
+                <Link to="/#contact" className="hover:text-[#8DD0F5] transition-colors">
                   {t('nav.contact')}
                 </Link>
               </li>
@@ -112,7 +112,7 @@ export default function Footer() {
                 <li key={s.id}>
                   <Link
                     to={`/services/${s.slug}`}
-                    className="hover:text-brand-400 transition-colors line-clamp-1"
+                    className="hover:text-[#8DD0F5] transition-colors line-clamp-1"
                   >
                     {isBn ? s.titleBn : s.titleEn}
                   </Link>
